@@ -1,0 +1,18 @@
+{
+  "name": "IGAF Limited Asset Manifest",
+  "version": "1.0.0",
+  "basePath": "/images/",
+  "assets": {
+    "rice-mill": "/images/rice-mill.jpg",
+    "grinding-machine": "/images/grinding-machine.jpg",
+    "chaff-cutter": "/images/chaff-cutter.jpg",
+    "hammer-mill": "/images/hammer-mill.jpg",
+    "garri-processing": "/images/garri-processing.jpg",
+    "water-pump": "/images/water-pump.jpg",
+    "power-tiller": "/images/power-tiller.jpg",
+    "grain-destoner": "/images/grain-destoner.jpg",
+    "maize-sheller": "/images/maize-sheller.jpg",
+    "spare-parts": "/images/spare-parts.jpg",
+    "igaf-logo": "/images/igaf-logo.jpg"
+  }
+}
