@@ -11,7 +11,10 @@ import {
   Wrench, 
   Tractor,
   Award,
-  CheckCircle2
+  CheckCircle2,
+  Headphones,
+  Cog,
+  Truck
 } from 'lucide-react';
 import { PageRoute } from '../types';
 import igafLogo from '../assets/images/igaf-logo.jpg';
@@ -178,6 +181,144 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* SERVICE HIGHLIGHTS */}
+      <section className="bg-gradient-to-b from-slate-50 to-emerald-50/50 py-16 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="bg-orange-100 text-orange-700 font-extrabold text-xs uppercase tracking-widest px-3 py-1 rounded-full border border-orange-200">
+              Service Highlights
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+              Post-Sale Support, Installation & Maintenance
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Purchasing machinery from IGAF Limited comes with guaranteed long-term technical backing. Our certified engineers ensure your equipment operates efficiently with minimal downtime.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Service Highlight 1 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center">
+                  <Cog className="w-7 h-7" />
+                </div>
+                <h3 className="font-extrabold text-slate-900 text-xl">
+                  On-Site Installation & Setup
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  We handle complete physical installation, engine calibration, and alignment for rice mills, garri processing units, and diesel generators across Nasarawa State.
+                </p>
+                <ul className="space-y-2 pt-2 text-xs text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Foundation alignment & vibration damping</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Engine oil, belt tension & safety shield checks</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Live test runs with actual grain/cassava batch</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Turnkey Setup Included</span>
+              </div>
+            </div>
+
+            {/* Service Highlight 2 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center">
+                  <Truck className="w-7 h-7" />
+                </div>
+                <h3 className="font-extrabold text-slate-900 text-xl">
+                  Maintenance & Mobile Repairs
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Prevent unexpected breakdowns during peak harvesting seasons with our routine maintenance plans and emergency technician dispatch service.
+                </p>
+                <ul className="space-y-2 pt-2 text-xs text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />
+                    <span>Mobile mechanic dispatch directly to your farm</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />
+                    <span>Scheduled engine overhaul & filter replacements</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />
+                    <span>Instant access to 100% original OEM replacement parts</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-orange-600 uppercase tracking-wider">Fast Field Response</span>
+              </div>
+            </div>
+
+            {/* Service Highlight 3 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center">
+                  <Headphones className="w-7 h-7" />
+                </div>
+                <h3 className="font-extrabold text-slate-900 text-xl">
+                  Dedicated Post-Sale Support
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Our technical team in Keffi provides ongoing operator training, direct telephone helpline support, and warranty troubleshooting for maximum machine longevity.
+                </p>
+                <ul className="space-y-2 pt-2 text-xs text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Hands-on operator safety & maintenance training</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Direct phone & WhatsApp technical consultation</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>Factory warranty coverage on all new equipment</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="pt-4 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Lifetime Technical Care</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Quick Helpline banner */}
+          <div className="bg-white rounded-2xl p-6 border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-emerald-950 text-orange-400 rounded-xl flex items-center justify-center shrink-0">
+                <Phone className="w-6 h-6" />
+              </div>
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-sm">Need Service or Repair Assistance?</h4>
+                <p className="text-xs text-slate-600">Speak directly with an IGAF technician at our Keffi Workshop.</p>
+              </div>
+            </div>
+            <a 
+              href="tel:07047197737" 
+              className="bg-emerald-900 hover:bg-emerald-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shrink-0 transition-colors flex items-center gap-2"
+            >
+              <span>Call Technician: 07047197737</span>
+            </a>
+          </div>
+
         </div>
       </section>
 

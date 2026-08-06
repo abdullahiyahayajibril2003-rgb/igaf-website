@@ -68,6 +68,18 @@ export const Header: React.FC<HeaderProps> = ({
     handleNav('home');
   };
 
+  // Lock body scroll when mobile slide-out drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const phoneDisplay = companyInfo?.phonePrimary || '07047197737';
   const announcementText = companyInfo?.announcement || "🇳🇬 West Africa's #1 Agricultural Machinery & Spare Parts Center • Fast Waybill Delivery Nationwide";
   const showAnnouncementBar = companyInfo ? companyInfo.showAnnouncement : true;
@@ -254,42 +266,117 @@ export const Header: React.FC<HeaderProps> = ({
 
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Slide-Out Drawer Overlay Backdrop */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-emerald-950 text-white border-t border-emerald-800 animate-fadeIn">
-          <div className="px-4 pt-3 pb-6 space-y-2">
-            {navItems.map((item) => (
-              <button
-                key={item.route}
-                onClick={() => handleNav(item.route)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-base font-semibold flex items-center justify-between ${
-                  activeRoute === item.route
-                    ? 'bg-orange-600 text-white'
-                    : 'text-emerald-100 hover:bg-emerald-900'
-                }`}
-              >
-                <span>{item.label}</span>
-                <ChevronRight className="w-4 h-4 opacity-70" />
-              </button>
-            ))}
+        <div 
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 lg:hidden transition-opacity animate-fadeIn"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
 
-            <div className="pt-4 border-t border-emerald-800 flex flex-col gap-2">
-              <button
-                onClick={() => handleNav('quote')}
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-bold text-center flex items-center justify-center gap-2 shadow-md"
-              >
-                <FileText className="w-5 h-5" />
-                <span>Request Official Quote</span>
-              </button>
-
-              <div className="flex items-center justify-between text-xs text-emerald-300 pt-2 px-1">
-                <span>Phone: 07047197737</span>
-                <span>Masalacin Idi, Keffi</span>
+      {/* Mobile Slide-Out Drawer Panel */}
+      <aside 
+        aria-label="Mobile Navigation Drawer"
+        className={`fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-emerald-950 text-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden flex flex-col justify-between overflow-y-auto ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full pointer-events-none'
+        }`}
+      >
+        <div>
+          {/* Drawer Header */}
+          <div className="p-4 border-b border-emerald-800 flex items-center justify-between bg-emerald-900/50">
+            <div className="flex items-center gap-3">
+              <img 
+                src={igafLogo} 
+                alt="IGAF Limited" 
+                className="h-9 w-auto object-contain rounded-md bg-white p-0.5"
+              />
+              <div>
+                <h3 className="font-extrabold text-sm text-white leading-tight">IGAF Limited</h3>
+                <p className="text-[10px] text-emerald-300">Agricultural Machinery Depot</p>
               </div>
+            </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 rounded-lg bg-emerald-900/80 hover:bg-orange-600 text-emerald-200 hover:text-white transition-colors"
+              aria-label="Close Mobile Menu"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Drawer Navigation Links */}
+          <nav className="p-4 space-y-1.5">
+            {navItems.map((item) => {
+              const isActive = activeRoute === item.route;
+              return (
+                <button
+                  key={item.route}
+                  onClick={() => handleNav(item.route)}
+                  className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between transition-all ${
+                    isActive
+                      ? 'bg-orange-600 text-white shadow-md'
+                      : 'text-emerald-100 hover:bg-emerald-900 hover:text-white'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  <ChevronRight className={`w-4 h-4 transition-transform ${isActive ? 'translate-x-1' : 'opacity-60'}`} />
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Drawer Action & Contact Footer */}
+        <div className="p-4 border-t border-emerald-800/90 bg-emerald-900/40 space-y-3">
+          
+          {onOpenCompare && comparedCount > 0 && (
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenCompare();
+              }}
+              className="w-full bg-emerald-800 hover:bg-emerald-700 text-white py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 border border-emerald-600 transition-colors shadow"
+            >
+              <SlidersHorizontal className="w-4 h-4 text-orange-400" />
+              <span>Compare Machines ({comparedCount})</span>
+            </button>
+          )}
+
+          <button
+            onClick={() => handleNav('quote')}
+            className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg transition-colors"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Request Price Quote</span>
+          </button>
+
+          <div className="pt-2 border-t border-emerald-800/60 space-y-2 text-xs text-emerald-200">
+            <a 
+              href={`tel:${phoneDisplay}`}
+              className="flex items-center gap-2.5 hover:text-white transition-colors"
+            >
+              <Phone className="w-4 h-4 text-orange-400 shrink-0" />
+              <span className="font-semibold">{phoneDisplay}</span>
+            </a>
+
+            <a 
+              href={`https://wa.me/234${phoneDisplay.replace(/^0/, '')}?text=Hello%20IGAF%20Limited,%20I%20am%20interested%20in%20your%20agricultural%20machinery.`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2.5 hover:text-white transition-colors text-emerald-300"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Chat on WhatsApp</span>
+            </a>
+
+            <div className="flex items-center gap-2.5 text-[11px] text-emerald-400 pt-1">
+              <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
+              <span className="truncate">{companyInfo?.address || 'Masalacin Idi'}, {companyInfo?.city || 'Keffi'}</span>
             </div>
           </div>
         </div>
-      )}
+      </aside>
 
     </header>
   );

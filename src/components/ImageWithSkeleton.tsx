@@ -32,14 +32,9 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
     setIsLoaded(false);
     setHasError(false);
 
-    // Check if the image is already completed (e.g., loaded from browser cache)
-    if (imgRef.current && imgRef.current.complete) {
-      if (imgRef.current.naturalWidth > 0) {
-        setIsLoaded(true);
-      } else if (imgRef.current.naturalWidth === 0 && imgRef.current.src) {
-        setIsLoaded(true);
-        setHasError(true);
-      }
+    // If the image is already cached and loaded by the browser
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
+      setIsLoaded(true);
     }
   }, [src]);
 
@@ -49,15 +44,18 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
       className={`relative overflow-hidden ${containerClassName}`}
       style={style}
     >
-      {/* Skeleton Shimmer Overlay when image is loading */}
+      {/* Skeleton Shimmer Overlay while image is fetching */}
       {!isLoaded && !hasError && (
-        <div className="absolute inset-0 bg-slate-200 animate-pulse bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200" />
+        <div className="absolute inset-0 bg-slate-200 animate-pulse bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 z-10 pointer-events-none" />
       )}
 
-      {/* Fallback if image fails */}
+      {/* Fallback only if the image genuinely fails to load (e.g., 404) */}
       {hasError && (
-        <div className="absolute inset-0 bg-slate-200 flex items-center justify-center text-slate-400 text-xs font-semibold p-2 text-center">
-          Image unavailable
+        <div className="absolute inset-0 bg-slate-100 flex flex-col items-center justify-center text-slate-400 p-2 text-center text-xs z-10">
+          <svg className="w-8 h-8 mb-1 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span className="font-medium text-slate-500">{alt || 'Product Image'}</span>
         </div>
       )}
 
@@ -73,6 +71,7 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
           setHasError(false);
         }}
         onError={() => {
+          console.error(`[ImageWithSkeleton] Failed to load image asset at URL: "${src}"`);
           setIsLoaded(true);
           setHasError(true);
         }}
@@ -83,3 +82,4 @@ export const ImageWithSkeleton: React.FC<ImageWithSkeletonProps> = ({
     </div>
   );
 };
+
