@@ -1,0 +1,6 @@
+{
+  "name": "IGAF Limited",
+  "description": "Official website for Ibrahimawa Global and Farm (IGAF) Limited - Agricultural Machinery Supplier in Masalacin Idi, Keffi, Nasarawa State, Nigeria.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
